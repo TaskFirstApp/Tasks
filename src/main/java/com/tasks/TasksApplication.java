@@ -2,6 +2,7 @@ package com.tasks;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.annotation.PostConstruct;
 
@@ -31,9 +32,9 @@ public class TasksApplication {
 
 	@PostConstruct
 	void loadTasks() {
-		tasksList.add(new Task("1", "High", "Get Car", "Get your car delivered from Rajdhani VW"));
-		tasksList.add(new Task("2", "High", "RC and RTO done", "Get RC and RTO done from local rewari secretariet."));
-		tasksList.add(new Task("3", "Low", "Music system",
+		tasksList.add(new Task("3201", "High", "Get Car", "Get your car delivered from Rajdhani VW"));
+		tasksList.add(new Task("1342", "High", "RC and RTO done", "Get RC and RTO done from local rewari secretariet."));
+		tasksList.add(new Task("311", "Low", "Music system",
 				"Geta good sound quality music system installed in your car, It must be bluetooth enabled."));
 	}
 
@@ -45,13 +46,14 @@ public class TasksApplication {
 		return responseEntity;
 	}
 
-	@PostMapping(path = "", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Object> addTask(@RequestParam String toDo, @RequestParam(required = false) String toDoDetail,
+	@PostMapping(path = "", produces = MediaType.TEXT_PLAIN_VALUE)
+	public ResponseEntity<String> addTask(@RequestParam String toDo, @RequestParam(required = false) String toDoDetail,
 			@RequestParam(required = false, defaultValue="Medium") String priority) {
-		tasksList.add(new Task("4", priority, toDo, toDoDetail));
+		String taskRef = UUID.randomUUID().toString();
+		tasksList.add(new Task(taskRef, priority, toDo, toDoDetail));
 		HttpHeaders headers = new HttpHeaders();
 		headers.setAccessControlAllowOrigin("*");
-		ResponseEntity<Object> responseEntity = new ResponseEntity<>(headers, HttpStatus.CREATED);
+		ResponseEntity<String> responseEntity = new ResponseEntity<>(taskRef, headers, HttpStatus.CREATED);
 		return responseEntity;
 	}
 
