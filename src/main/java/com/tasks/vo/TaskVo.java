@@ -1,24 +1,19 @@
-package com.tasks.entity;
+package com.tasks.vo;
 
 import java.time.ZonedDateTime;
-import java.util.List;
-import java.util.Optional;
 
-import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@Builder
-public class Task {
-	String taskId;
+@NoArgsConstructor
+public class TaskVo {
 	String priority;
 	String toDo;
 	String toDoDetails;	
 	String assignedTo;
-	String initiator;
 	ZonedDateTime createdOn;
 	ZonedDateTime expectedEndTime;	
-	Optional<List<TaskProgress>> taskProgresses; 
 }
