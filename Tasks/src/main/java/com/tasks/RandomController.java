@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 //@RequestMapping("/tasks")
 public class RandomController {
-	@Value("${DealOfTheDay}")
+	//@Value("${DealOfTheDay}")
 	String dealOfTheDay;
 
 	@GetMapping(path = "/deal-of-the-day", produces = MediaType.APPLICATION_JSON_VALUE)
