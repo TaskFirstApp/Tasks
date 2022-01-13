@@ -1,0 +1,25 @@
+services:
+  postgres-db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - "POSTGRES_PASSWORD=mysecretpassword"
+      - "POSTGRES_DB=postgres"
+      - "POSTGRES_DB=tasks"
+  pgadmin:
+    image: dpage/pgadmin4
+    ports:
+      - "9001:80"
+    environment:
+      - "PGADMIN_DEFAULT_EMAIL=vikashsaini01@gmail.com"
+      - "PGADMIN_DEFAULT_PASSWORD=password"
+  tasks:
+    build: ../Tasks/
+    environment:
+      - "spring.datasource.url=jdbc:postgresql://postgres-db:5432/tasks"
+      - "spring.datasource.username=postgres"
+      - "spring.datasource.password=mysecretpassword"
+    ports:
+      - "8080:8080"
+      
