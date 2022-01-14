@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.security.SecurityValidator;
 import com.tasks.entity.Task;
 import com.tasks.service.TaskService;
 import com.tasks.vo.TaskProgressVo;
@@ -30,10 +31,15 @@ public class TaskController {
 	
 	@Autowired
 	private TaskRepository taskRepository;
+	
+	@Autowired
+	SecurityValidator securityValidator;
 		
 
 	@GetMapping(path = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Task>> findAllTasks() {
+		if(!securityValidator.validate())
+			throw new RuntimeException("Validation error");
 		HttpHeaders headers = new HttpHeaders();
 		headers.setAccessControlAllowOrigin("*");
 		ResponseEntity<List<Task>> responseEntity = new ResponseEntity<List<Task>>(taskRepository.findAll(), headers,

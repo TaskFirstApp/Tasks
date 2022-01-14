@@ -7,6 +7,9 @@ services:
       - "POSTGRES_PASSWORD=mysecretpassword"
       - "POSTGRES_DB=postgres"
       - "POSTGRES_DB=tasks"
+    volumes:
+      - vol-postgres-db:/var/lib/postgresql/data
+    profiles: ["db","dbfull","min-all","all"]
   pgadmin:
     image: dpage/pgadmin4
     ports:
@@ -14,6 +17,9 @@ services:
     environment:
       - "PGADMIN_DEFAULT_EMAIL=vikashsaini01@gmail.com"
       - "PGADMIN_DEFAULT_PASSWORD=password"
+    volumes:
+      - vol-pgadmin:/var/lib/pgadmin
+    profiles: ["dbfull","all"]
   tasks:
     build: ../Tasks/
     environment:
@@ -21,5 +27,9 @@ services:
       - "spring.datasource.username=postgres"
       - "spring.datasource.password=mysecretpassword"
     ports:
-      - "8080:8080"
-      
+      - "9051:8080"
+    profiles: ["min-all","all"]
+volumes:
+    vol-postgres-db:
+    vol-pgadmin:
+    

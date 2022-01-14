@@ -3,10 +3,10 @@ package com.tasks;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.security.SecurityEnabled;
+
 @SpringBootApplication
-//@EnableEurekaClient
-//@Configuration
-//@RefreshScope
+@SecurityEnabled
 public class TasksApplication {
 
 	public static void main(String[] args) {
