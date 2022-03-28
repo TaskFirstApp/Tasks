@@ -1,17 +1,18 @@
 
 <form >
-Task: <input type="text" />
-Task details: <textarea></textarea>
-<input type="button" value="save" />  
+Task: <input type="text" name= "toDo" id= "toDo" [formControl]="toDo" />
+Task details: <textarea name= "toDoDetail" id= "toDoDetail" [formControl]="toDoDetail"></textarea>
+<input type="button" value="save" (click)="saveTask()"/>  
 </form>
 <div>
     <ul>
-        <li *ngFor="let t of tasks">            
+        <li *ngFor="let t of tasks" (click)="showTask(t)">            
             <span>{{t.id}}</span><br/>
             <span>{{t.toDo}}</span> <br/>
             <span>{{t.toDoDetails}}</span> <br/>
         </li>
     </ul>
+    <span> {{detailsSection}} </span>
 
 </div>
 <router-outlet></router-outlet>

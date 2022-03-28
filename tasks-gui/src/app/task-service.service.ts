@@ -1,4 +1,6 @@
-import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Inject, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Task } from './Task';
 
 @Injectable({
@@ -6,17 +8,27 @@ import { Task } from './Task';
 })
 
 
+@Injectable()
 export class TaskServiceService {
 
-  constructor() { }
+  constructor(private httpClient : HttpClient ) { }
+
+  private tasksUrl = "http://localhost:9051/tasks";
+  
+
+   tasks1: Task[] = [    
+    {id: 1,toDo: "todo",toDoDetails: "details"  },
+    {id: 3,toDo: "3 todo",toDoDetails: "3 details"  }
+  ];
+
+  getTasks(): Observable<Task[]>{     
+      return this.httpClient.get<Task[]>(this.tasksUrl);
+  }
 
 
-  getTasks(): Task[]{
-    const tasks1: Task[] = [    
-      {id: 1,toDo: "todo",toDoDetails: "details"  }
-    ];
 
-    return tasks1;
+  saveTasks(t: Task): Observable<Task>{    
+     return this.httpClient.post<Task>(this.tasksUrl, t);
   }
       
 }
