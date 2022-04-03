@@ -24,6 +24,14 @@ public class TaskServiceImpl implements TaskService {
 	TaskRepository taskRepository;
 
 	@Override
+	public Task updateTask(Task task) {
+		Task existingTask = taskRepository.findById(task.getId()).orElseThrow(() -> {
+			return new RuntimeException("Record not found");
+		});
+		return taskRepository.save(task);
+	}
+	
+	@Override
 	public Task addTask(TaskVo taskVo) {
 		Task task = Task.builder().build();
 		String taskRef = TaskUtils.getUniqueRef();

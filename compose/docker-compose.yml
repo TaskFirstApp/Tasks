@@ -33,3 +33,5 @@ volumes:
     vol-postgres-db:
     vol-pgadmin:
     
+    
+# sudo docker-compose --profile min-all up --build

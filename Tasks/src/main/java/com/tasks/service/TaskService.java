@@ -7,6 +7,8 @@ import com.tasks.vo.TaskVo;
 public interface TaskService {
 
 	public Task addTask(TaskVo taskVo);
+	
+	public Task updateTask(Task task);
 
 	public Task addProgress(String taskId, TaskProgressVo taskProgressVo);
 

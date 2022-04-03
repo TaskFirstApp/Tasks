@@ -8,8 +8,10 @@ Task details: <textarea name= "toDoDetail" id= "toDoDetail" [formControl]="toDoD
     <ul>
         <li *ngFor="let t of tasks" (click)="showTask(t)">            
             <span>{{t.id}}</span><br/>
-            <span>{{t.toDo}}</span> <br/>
-            <span>{{t.toDoDetails}}</span> <br/>
+            <input value={{t.toDo}} /> <br/>
+            <textarea>{{t.toDoDetails}}</textarea> <br/>
+            <button (click)="updateTask(t.id, t.toDo, t.toDoDetails)">update</button> <br/>
+            <button (click)="deleteTask(t.id)">delete</button> <br/>
         </li>
     </ul>
     <span> {{detailsSection}} </span>

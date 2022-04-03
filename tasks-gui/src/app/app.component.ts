@@ -36,14 +36,24 @@ export class AppComponent {
   saveTask() : void {
     this.taskServ.saveTasks({id: 0, toDo:this.toDo.value, toDoDetails:this.toDoDetail.value }).subscribe(
       
-    );
+    );    
   }
 
   showTask(t: Task) : void {
     this.detailsSection = t.toDoDetails;
   }
 
+  deleteTask(id : number){
+    this.taskServ.deleteTask(id).subscribe(      
+    );    
+  }
   
+  updateTask(idVar : number, todoVar : string, toDoDetailVar : string){
+    var taskObj:Task = {id: idVar,toDo: todoVar,toDoDetails: toDoDetailVar  };
+    this.taskServ.updateTask(taskObj).subscribe(      
+    );    
+  }
+
 }
 
 
