@@ -22,9 +22,8 @@ export class AppComponent {
 
   detailsSection? : String ;
 
-  constructor(private taskServ : TaskServiceService){
-    
-  }
+  constructor(private taskServ : TaskServiceService){}
+
   ngOnInit(): void {
     this.setTasks();
   }
@@ -35,7 +34,6 @@ export class AppComponent {
 
   saveTask() : void {
     this.taskServ.saveTasks({id: 0, toDo:this.toDo.value, toDoDetails:this.toDoDetail.value }).subscribe(
-      
     );    
   }
 
